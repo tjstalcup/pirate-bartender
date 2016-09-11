@@ -50,11 +50,12 @@ var bartender = {
     createDrink: function() {
         //Should iterate through the preference object to see which preferences are present
         //Should then randomly select items from pantry that correspond to preferences
-        var drink = "";
+        var drink = "<ul>";
         for (var i = 0; i < this.preferences.length; i++) {
-            drink += this.pantry[parseInt(this.preferences[i])][Math.floor(Math.random * 3)] + " ";
+            drink += "<li>" + this.pantry[parseInt(this.preferences[i])][Math.floor(Math.random() * 3)] + "</li>";
         }
-        console.log(drink);
+        drink += "</ul>";
+        $(".drink-space").html(drink);
     }
 };
 
