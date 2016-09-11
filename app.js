@@ -6,11 +6,36 @@ var bartender = {
         "Would ye like a bit of sweetness with yer poison?",
         "Are ye one for a fruity finish?"
     ],
+
     //An empty array for user preferences to be pushed to
     preferences: [],
 
     askQuestions: function() {
-        //Should iterate through the quesitons array and populate the preferences array with user answers of yes or no
+        //Should iterate through questions array and populate preferences array with indexes of questions that have been answered yes to
+        var questionIndex = 0;
+        $(".question-space").html(bartender.questions[questionIndex]);
+        $(".btn-success").click(function() {
+            if (questionIndex === 4) {
+                bartender.preferences.push(questionIndex);
+                $(".question-space").html("<h2>Questions Complete!</h2>");
+                $(".answer-space").empty();
+            } else {
+                bartender.preferences.push(questionIndex);
+                questionIndex++;
+                $(".question-space").html(bartender.questions[questionIndex]);
+            }
+
+        });
+
+        $(".btn-danger").click(function() {
+            if (questionIndex === 4) {
+                $(".question-space").html("<h2>Questions Complete!</h2>");
+                $(".answer-space").empty();
+            } else {
+                questionIndex++;
+                $(".question-space").html(bartender.questions[questionIndex]);
+            }
+        });
 
     },
 
@@ -25,6 +50,15 @@ var bartender = {
     createDrink: function() {
         //Should iterate through the preference object to see which preferences are present
         //Should then randomly select items from pantry that correspond to preferences
-
+        var drink = "";
+        for (var i = 0; i < this.preferences.length; i++) {
+            drink += this.pantry[parseInt(this.preferences[i])][Math.floor(Math.random * 3)] + " ";
+        }
+        console.log(drink);
     }
 };
+
+$(document).ready(function() {
+    //Invoke bartender question function here
+    bartender.askQuestions();
+});
