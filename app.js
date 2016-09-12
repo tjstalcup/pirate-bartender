@@ -15,7 +15,7 @@ var bartender = {
         var questionIndex = 0;
         $(".question-space").html(bartender.questions[questionIndex]);
         $(".btn-success").click(function() {
-            if (questionIndex === 4) {
+            if (questionIndex === bartender.questions.length) {
                 bartender.preferences.push(questionIndex);
                 $(".question-space").html("<h2>Here's yar drink matey!</h2>");
                 $(".answer-space").empty();
@@ -29,7 +29,7 @@ var bartender = {
         });
 
         $(".btn-danger").click(function() {
-            if (questionIndex === 4) {
+            if (questionIndex === bartender.questions.length) {
                 $(".question-space").html("<h2>Here's yar drink matey!</h2>");
                 $(".answer-space").empty();
                 bartender.createDrink();
